@@ -1,0 +1,89 @@
+.audio-player {
+  width: 15vw;
+  height: 15vw;
+  border-radius: 50%;
+  background-size: cover;
+  overflow: hidden;
+  &.playing {
+    animation: rotate 12s linear infinite forwards;
+    &::after {
+      background-color: rgba($color: #000000, $alpha: 0.1);
+    }
+  }
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+  }
+  .play-flag {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    position: absolute;
+    right: 50%;
+    bottom: 50%;
+    z-index: 20;
+    margin-right: -12.5px;
+    margin-bottom: -12.5px;
+    transform: scale(0.6);
+    transition: all 0.2s ease-in-out;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-top: -6px;
+      margin-left: -3px;
+      border: 6px solid transparent;
+      border-left-color: #fff;
+    }
+    &.playing {
+      position: absolute;
+      display: none;
+      right: 5px;
+      bottom: 5px;
+      margin-right: 0;
+      margin-bottom: 0;
+      transform: scale(0.8);
+      &::before {
+        height: 10px;
+        width: 2px;
+        background-color: #fff;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -5px;
+        margin-left: -2px;
+        border: none;
+      }
+      &::after {
+        content: '';
+        display: block;
+        height: 10px;
+        width: 2px;
+        background-color: #fff;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -5px;
+        margin-left: 1px;
+        border: none;
+      }
+    }
+  }
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
