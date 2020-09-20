@@ -1,4 +1,4 @@
-p {
+article > div > p {
   text-align: justify;
-  /* text-indent: 2em; */
+  text-indent: 2em;
 }

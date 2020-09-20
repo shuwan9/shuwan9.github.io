@@ -3,7 +3,7 @@ title: 为什么要翻墙
 date: '2019-12-12'
 spoiler: 由于众所周知的原因...
 src: 'ferry-ticket.mp3'
-bg: 'ferry-ticket.png'
+bg: 'ferry-ticket.jpg'
 ---
 
 由于众所周知的原因。呵呵，到底是不是众所周知呢。
