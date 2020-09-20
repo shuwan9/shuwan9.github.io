@@ -1,33 +1,30 @@
-import React from 'react';
-import { Link, graphql } from 'gatsby';
-import get from 'lodash/get';
+import React from 'react'
+import { Link, graphql } from 'gatsby'
+import get from 'lodash/get'
 
-import '../fonts/fonts-post.css';
-import Bio from '../components/Bio';
-import Layout from '../components/Layout';
-import SEO from '../components/SEO';
-import Panel from '../components/Panel';
-import { formatPostDate, formatReadingTime } from '../utils/helpers';
-import { rhythm, scale } from '../utils/typography';
+import '../fonts/fonts-post.css'
+import Bio from '../components/Bio'
+import Layout from '../components/Layout'
+import SEO from '../components/SEO'
+import Panel from '../components/Panel'
+import { formatPostDate, formatReadingTime } from '../utils/helpers'
+import { rhythm, scale } from '../utils/typography'
 import {
   codeToLanguage,
   createLanguageLink,
   loadFontsForCode,
   replaceAnchorLinksByLanguage,
-} from '../utils/i18n';
-
-const GITHUB_USERNAME = 'shuwang0000';
-const GITHUB_REPO_NAME = 'blog';
+} from '../utils/i18n'
 const systemFont = `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif`;
+    "Droid Sans", "Helvetica Neue", sans-serif`
 
 class Translations extends React.Component {
   render() {
-    let { translations, lang, languageLink, editUrl } = this.props;
+    let { translations, lang, languageLink, editUrl } = this.props
 
-    let readerTranslations = translations.filter(lang => lang !== 'ru');
-    let hasRussianTranslation = translations.indexOf('ru') !== -1;
+    let readerTranslations = translations.filter(lang => lang !== 'ru')
+    let hasRussianTranslation = translations.indexOf('ru') !== -1
 
     return (
       <div className="translations">
@@ -86,72 +83,62 @@ class Translations extends React.Component {
           )}
         </Panel>
       </div>
-    );
+    )
   }
 }
 
 class BlogPostTemplate extends React.Component {
-  getAudioPlayerConfig(post) {
-    const { rawMarkdownBody } = post;
-    const audioPlayerSrc = rawMarkdownBody.match(
-      /audioPlayerSrc:('|")(.+)('|")/
-    )
-      ? rawMarkdownBody.match(/audioPlayerSrc:('|")(.+)('|")/)[2]
-      : null;
-    const audioPlayerBg = rawMarkdownBody.match(/audioPlayerBg:('|")(.+)('|")/)
-      ? rawMarkdownBody.match(/audioPlayerBg:('|")(.+)('|")/)[2]
-      : null;
-    return {
-      audioPlayerBg,
-      audioPlayerSrc,
-    };
-  }
   render() {
-    const post = this.props.data.markdownRemark;
-    const audioPlayerConfig = this.getAudioPlayerConfig(post);
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title');
+    console.log(this.props)
+    const post = this.props.data.markdownRemark
+    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
+    const fileServerUrl = get(
+      this.props,
+      'data.site.siteMetadata.fileServerUrl'
+    )
     let {
       previous,
       next,
       slug,
       translations,
       translatedLinks,
-    } = this.props.pageContext;
-    const lang = post.fields.langKey;
+    } = this.props.pageContext
+    const lang = post.fields.langKey
 
     // Replace original links with translated when available.
-    let html = post.html;
+    let html = post.html
 
     // Replace original anchor links by lang when available in whitelist
     // see utils/whitelist.js
-    html = replaceAnchorLinksByLanguage(html, lang);
+    html = replaceAnchorLinksByLanguage(html, lang)
 
     translatedLinks.forEach(link => {
       // jeez
       function escapeRegExp(str) {
-        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
       }
-      let translatedLink = '/' + lang + link;
+      let translatedLink = '/' + lang + link
       html = html.replace(
         new RegExp('"' + escapeRegExp(link) + '"', 'g'),
         '"' + translatedLink + '"'
-      );
-    });
+      )
+    })
 
-    translations = translations.slice();
+    translations = translations.slice()
     translations.sort((a, b) => {
-      return codeToLanguage(a) < codeToLanguage(b) ? -1 : 1;
-    });
+      return codeToLanguage(a) < codeToLanguage(b) ? -1 : 1
+    })
 
-    loadFontsForCode(lang);
+    loadFontsForCode(lang)
     // TODO: this curried function is annoying
-    const languageLink = createLanguageLink(slug, lang);
-    const enSlug = languageLink('en');
+    const languageLink = createLanguageLink(slug, lang)
+    const enSlug = languageLink('en')
     return (
       <Layout
         location={this.props.location}
         title={siteTitle}
-        {...audioPlayerConfig}
+        src={fileServerUrl + post.frontmatter.src}
+        bg={fileServerUrl + post.frontmatter.bg}
       >
         <SEO
           lang={lang}
@@ -209,7 +196,7 @@ class BlogPostTemplate extends React.Component {
               }}
               to={'/'}
             >
-              shuwan9.surge.sh
+              shuwan9.js.org
             </Link>
           </h3>
           <Bio />
@@ -245,11 +232,11 @@ class BlogPostTemplate extends React.Component {
           </nav>
         </aside>
       </Layout>
-    );
+    )
   }
 }
 
-export default BlogPostTemplate;
+export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -257,6 +244,7 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+        fileServerUrl
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
@@ -268,6 +256,8 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         spoiler
+        src
+        bg
       }
       fields {
         slug
@@ -275,4 +265,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

@@ -2,11 +2,9 @@
 title: '开始写博客吧'
 date: '2019-12-10'
 spoiler: 一直想弄个技术博客来着...
+src: 'wake.mp3'
+bg: 'wake.png'
 ---
-<p style="display:none;">
-    audioPlayerSrc:'https://shuw.gitee.io/server/music/wake.mp3'
-    audioPlayerBg:'https://shuw.gitee.io/server/music/wake.jpg'
-<p>
 
 ``` js
 console.log('hi~')

@@ -1,35 +1,28 @@
-import { Link, graphql } from 'gatsby';
-import { formatPostDate, formatReadingTime } from '../utils/helpers';
+import { Link, graphql } from 'gatsby'
+import { formatPostDate, formatReadingTime } from '../utils/helpers'
 
-import Bio from '../components/Bio';
-import Footer from '../components/Footer';
-import Layout from '../components/Layout';
-import Panel from '../components/Panel';
-import React from 'react';
-import SEO from '../components/SEO';
-import get from 'lodash/get';
-import { rhythm } from '../utils/typography';
+import Bio from '../components/Bio'
+import Footer from '../components/Footer'
+import Layout from '../components/Layout'
+import React from 'react'
+import SEO from '../components/SEO'
+import get from 'lodash/get'
+import { rhythm } from '../utils/typography'
 
 class BlogIndexTemplate extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title');
-    const homeAudioPlayerBg = get(
-      this,
-      'props.data.site.siteMetadata.homeAudioPlayerBg'
-    );
-    const homeAudioPlayerSrc = get(
-      this,
-      'props.data.site.siteMetadata.homeAudioPlayerSrc'
-    );
-    const langKey = this.props.pageContext.langKey;
+    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
+    const homeSrc = get(this.props, 'data.site.siteMetadata.homeSrc')
+    const homeBg = get(this.props, 'data.site.siteMetadata.homeBg')
+    const langKey = this.props.pageContext.langKey
 
-    const posts = get(this, 'props.data.allMarkdownRemark.edges');
+    const posts = get(this, 'props.data.allMarkdownRemark.edges')
     return (
       <Layout
         location={this.props.location}
         title={siteTitle}
-        homeAudioPlayerBg={homeAudioPlayerBg}
-        homeAudioPlayerSrc={homeAudioPlayerSrc}
+        bg={homeBg}
+        src={homeSrc}
       >
         <SEO />
         <aside>
@@ -39,8 +32,7 @@ class BlogIndexTemplate extends React.Component {
           {!posts
             ? null
             : posts.map(({ node }) => {
-                const title =
-                  get(node, 'frontmatter.title') || node.fields.slug;
+                const title = get(node, 'frontmatter.title') || node.fields.slug
                 return (
                   <article key={node.fields.slug}>
                     <header>
@@ -70,16 +62,16 @@ class BlogIndexTemplate extends React.Component {
                       }}
                     />
                   </article>
-                );
+                )
               })}
         </main>
         <Footer />
       </Layout>
-    );
+    )
   }
 }
 
-export default BlogIndexTemplate;
+export default BlogIndexTemplate
 
 export const pageQuery = graphql`
   query($langKey: String!) {
@@ -87,8 +79,8 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         description
-        homeAudioPlayerBg
-        homeAudioPlayerSrc
+        homeSrc
+        homeBg
       }
     }
     allMarkdownRemark(
@@ -111,4 +103,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

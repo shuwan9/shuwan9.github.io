@@ -1,68 +1,75 @@
-import './AudioPlayer.scss';
-import React, { useState, useEffect } from 'react';
+import './AudioPlayer.scss'
+import React from 'react'
 class AudioPlayer extends React.Component {
   constructor(props) {
-    super();
+    super()
     this.state = {
       playFlag: false,
-    };
-    this.audio = null;
+    }
+    this.audio = null
   }
   handleClick = e => {
-    e.stopPropagation();
+    e.stopPropagation()
     this.setState({
       playFlag: !this.state.playFlag,
-    });
+    })
     if (this.audio.paused) {
-      this.audio.play();
+      this.audio.play()
     } else {
-      this.audio.pause();
+      this.audio.pause()
     }
-  };
+  }
   onAudioStop = () => {
-    let { playFlag } = this.state;
+    let { playFlag } = this.state
     if (playFlag) {
       this.setState({
         playFlag: false,
-      });
+      })
     }
-  };
+  }
   onAudioPlay = () => {
-    let { playFlag } = this.state;
+    let { playFlag } = this.state
     if (!playFlag) {
       this.setState({
         playFlag: true,
-      });
+      })
     }
-  };
+  }
   componentDidMount() {
-    this.audio.addEventListener('ended', this.onAudioStop, false);
-    this.audio.addEventListener('pause', this.onAudioStop, false);
-    this.audio.addEventListener('play', this.onAudioPlay, false);
+    this.audio.addEventListener('ended', this.onAudioStop, false)
+    this.audio.addEventListener('pause', this.onAudioStop, false)
+    this.audio.addEventListener('play', this.onAudioPlay, false)
   }
   componentWillUnmount() {
-    this.audio.removeEventListener('ended', this.onAudioStop);
-    this.audio.removeEventListener('pause', this.onAudioStop);
-    this.audio.removeEventListener('play', this.onAudioPlay);
+    this.audio.removeEventListener('ended', this.onAudioStop)
+    this.audio.removeEventListener('pause', this.onAudioStop)
+    this.audio.removeEventListener('play', this.onAudioPlay)
   }
   componentWillReceiveProps(next) {
     if (next.src === this.props.src) {
-      return;
+      return
     } else {
       if (this.state.playFlag) {
-        this.setState({ playFlag: false });
+        this.setState({ playFlag: false })
       }
-      this.audio.pause();
-      this.audio.load();
+      this.audio.pause()
+      this.audio.load()
     }
   }
   render() {
-    let { src, style } = this.props;
-    let { playFlag } = this.state;
+    function getStyle({ backgroundImage }) {
+      return {
+        position: 'relative',
+        backgroundImage,
+      }
+    }
+    function getClassName({ playFlag }) {
+      return playFlag ? 'audio-player playing' : 'audio-player'
+    }
     return (
       <div
-        style={style}
-        className={playFlag ? 'audio-player playing' : 'audio-player'}
+        style={getStyle(this.props)}
+        className={getClassName(this.state)}
         onClick={this.handleClick}
       >
         <audio
@@ -70,18 +77,15 @@ class AudioPlayer extends React.Component {
           preload="auto"
           autoPlay={false}
           ref={node => {
-            this.audio = node;
+            this.audio = node
           }}
           style={{ display: 'none' }}
         >
-          <source src={src} />
+          <source src={this.props.src} />
         </audio>
-        <span
-          className={playFlag ? 'play-flag playing' : 'play-flag'}
-          onClick={this.handleClick}
-        />
+        <span className={getClassName(this.state)} onClick={this.handleClick} />
       </div>
-    );
+    )
   }
 }
-export default AudioPlayer;
+export default AudioPlayer

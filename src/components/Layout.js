@@ -1,39 +1,39 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import Toggle from './Toggle';
-import Helmet from 'react-helmet';
+import React from 'react'
+import { Link } from 'gatsby'
+import Toggle from './Toggle'
+import Helmet from 'react-helmet'
 
-import { rhythm, scale } from '../utils/typography';
+import { rhythm, scale } from '../utils/typography'
 
-import AudioPlayer from './AudioPlayer/AudioPlayer';
+import AudioPlayer from './AudioPlayer/AudioPlayer'
 
-import sun from '../assets/sun.png';
-import moon from '../assets/moon.png';
+import sun from '../assets/sun.png'
+import moon from '../assets/moon.png'
 
-import './Layout.css';
+import './Layout.css'
 
 function MyTitle({ title }) {
-  return <>{title}</>;
+  return <>{title}</>
 }
 
 class Layout extends React.Component {
   state = {
     theme: null,
-  };
+  }
   componentDidMount() {
-    this.setState({ theme: window.__theme });
+    this.setState({ theme: window.__theme })
     window.__onThemeChange = () => {
-      this.setState({ theme: window.__theme });
-    };
+      this.setState({ theme: window.__theme })
+    }
   }
   isHome() {
-    const { location, title } = this.props;
-    const rootPath = `${__PATH_PREFIX__}/`;
-    return location.pathname === rootPath;
+    const { location, title } = this.props
+    const rootPath = `${__PATH_PREFIX__}/`
+    return location.pathname === rootPath
   }
   renderHeader() {
-    const { location, title } = this.props;
-    const rootPath = `${__PATH_PREFIX__}/`;
+    const { location, title } = this.props
+    const rootPath = `${__PATH_PREFIX__}/`
 
     if (location.pathname === rootPath) {
       return (
@@ -46,7 +46,7 @@ class Layout extends React.Component {
         >
           <MyTitle title={title} />
         </h1>
-      );
+      )
     } else {
       return (
         <h3
@@ -70,33 +70,16 @@ class Layout extends React.Component {
             <MyTitle title={title} />
           </Link>
         </h3>
-      );
+      )
     }
   }
   renderPlayer() {
-    let homeBackgroundImage = `url(${this.props.homeAudioPlayerBg})`;
-    let homeSrc = this.props.homeAudioPlayerSrc;
-    let postBackgroundImage = `url(${this.props.audioPlayerBg})`;
-    let postSrc = this.props.audioPlayerSrc;
-    return this.isHome()
-      ? this.getAudioPlayer(
-          this.getAudioPlayerProps(homeBackgroundImage, homeSrc)
-        )
-      : this.getAudioPlayer(
-          this.getAudioPlayerProps(postBackgroundImage, postSrc)
-        );
-  }
-  getAudioPlayer(props) {
-    return <AudioPlayer {...props} />;
-  }
-  getAudioPlayerProps(backgroundImage, src) {
-    return {
-      style: { position: 'relative', backgroundImage },
-      src,
-    };
+    let bg = `url(${this.props.bg})`
+    let src = this.props.src
+    return <AudioPlayer backgroundImage={bg} src={src} />
   }
   render() {
-    const { children } = this.props;
+    const { children } = this.props
     return (
       <div
         style={{
@@ -168,8 +151,8 @@ class Layout extends React.Component {
           {children}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Layout;
+export default Layout

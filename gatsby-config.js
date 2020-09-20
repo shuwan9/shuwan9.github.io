@@ -3,10 +3,10 @@ module.exports = {
     title: '飞机飞过天空',
     author: '疏旺',
     description: 'Personal blog by 疏旺.',
-    siteUrl: 'https://shuwan9.surge.sh/',
-    homeAudioPlayerSrc: 'https://shuw.gitee.io/server/music/sky-city.mp3',
-    homeAudioPlayerBg: 'https://shuw.gitee.io/server/music/sky-city.png',
-    fileServerUrl: 'https://shuw.gitee.io/server/music/',
+    siteUrl: 'https://shuwan9.js.org/',
+    homeSrc: 'https://cdn.jsdelivr.net/gh/xiaomeiwu/cdn/music/sky-city.mp3',
+    homeBg: 'https://cdn.jsdelivr.net/gh/xiaomeiwu/cdn/music/sky-city.png',
+    fileServerUrl: 'https://cdn.jsdelivr.net/gh/xiaomeiwu/cdn/music/',
     social: {
       twitter: '@shuwan91',
     },
@@ -60,8 +60,8 @@ module.exports = {
     // {
     //   resolve: `gatsby-plugin-manifest`,
     //   options: {
-    //     name: `shuwan9.surge.sh`,
-    //     short_name: `shuwan9.surge.sh`,
+    //     name: `shuwan9.js.org`,
+    //     short_name: `shuwan9.js.org`,
     //     start_url: `/`,
     //     background_color: `#ffffff`,
     //     theme_color: `#ffa7c4`,
@@ -86,4 +86,4 @@ module.exports = {
     },
     `gatsby-plugin-catch-links`,
   ],
-};
+}

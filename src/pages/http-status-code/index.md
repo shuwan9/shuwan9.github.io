@@ -2,11 +2,9 @@
 title: 'HTTP常用状态码'
 date: '2019-12-20'
 spoiler: '<<图解HTTP>>笔记(一)'
+src: 'notebook.mp3'
+bg: 'notebook.png'
 ---
-<p style="display:none;">
-    audioPlayerSrc:'https://shuw.gitee.io/server/music/notebook.mp3'
-    audioPlayerBg:'https://shuw.gitee.io/server/music/notebook.png'
-<p>
 
 状态码的职责是当客户端向服务器端发送请求时，描述返回的请求结果。借助状态码，用户可以知道服务器端是正常处理了请求，还是出现了错误。
 

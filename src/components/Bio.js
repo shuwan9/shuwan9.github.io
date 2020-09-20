@@ -1,5 +1,5 @@
-import React from 'react';
-import { rhythm } from '../utils/typography';
+import React from 'react'
+import { rhythm } from '../utils/typography'
 
 class Bio extends React.Component {
   render() {
@@ -15,8 +15,8 @@ class Bio extends React.Component {
           <a href="https://mobile.twitter.com/shuwan91">疏旺</a>.
         </p>
       </div>
-    );
+    )
   }
 }
 
-export default Bio;
+export default Bio

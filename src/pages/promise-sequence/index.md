@@ -2,11 +2,9 @@
 title: '异步操作按序执行'
 date: '2020-01-01'
 spoiler: promise sequence
+src: 'hot-river.mp3'
+bg: 'hot-river.png'
 ---
-<p style="display:none;">
-    audioPlayerSrc:'https://shuw.gitee.io/server/music/hot-river.mp3'
-    audioPlayerBg:'https://shuw.gitee.io/server/music/hot-river.png'
-<p>
 
 先上一段代码
 
