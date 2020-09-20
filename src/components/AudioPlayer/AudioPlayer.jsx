@@ -63,13 +63,16 @@ class AudioPlayer extends React.Component {
         backgroundImage,
       }
     }
-    function getClassName({ playFlag }) {
-      return playFlag ? 'audio-player playing' : 'audio-player'
+    function getClassName({ playFlag }, defaultClassName) {
+      if (playFlag) {
+        return defaultClassName + ' playing'
+      }
+      return defaultClassName
     }
     return (
       <div
         style={getStyle(this.props)}
-        className={getClassName(this.state)}
+        className={getClassName(this.state, 'audio-player')}
         onClick={this.handleClick}
       >
         <audio
@@ -83,7 +86,10 @@ class AudioPlayer extends React.Component {
         >
           <source src={this.props.src} />
         </audio>
-        <span className={getClassName(this.state)} onClick={this.handleClick} />
+        <span
+          className={getClassName(this.state, 'play-flag')}
+          onClick={this.handleClick}
+        />
       </div>
     )
   }
