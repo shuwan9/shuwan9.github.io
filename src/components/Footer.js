@@ -31,14 +31,14 @@ class Footer extends React.Component {
         >
           github
         </a>{' '}
-        &bull;{' '}
-        <a
+        {/* &bull;{' '} */}
+        {/* <a
           href="https://shuwan9-resume.surge.sh"
           target="_blank"
           rel="noopener noreferrer"
         >
           resume
-        </a>{' '}
+        </a>{' '} */}
       </footer>
     )
   }
