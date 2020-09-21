@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
+import { DiscussionEmbed } from 'disqus-react'
 import get from 'lodash/get'
 
 import '../fonts/fonts-post.css'
@@ -103,7 +104,10 @@ class BlogPostTemplate extends React.Component {
       translatedLinks,
     } = this.props.pageContext
     const lang = post.fields.langKey
-
+    const disqusConfig = {
+      shortname: 'shuwan9',
+      config: { identifier: slug, title: siteTitle },
+    }
     // Replace original links with translated when available.
     let html = post.html
 
@@ -173,6 +177,7 @@ class BlogPostTemplate extends React.Component {
             </header>
             <div dangerouslySetInnerHTML={{ __html: html }} />
           </article>
+          <DiscussionEmbed {...disqusConfig} />
         </main>
         <aside>
           <div
