@@ -28,7 +28,7 @@ ListenRun.prototype.run = function () {
             setText$(`获取失败`, ",10s后重新运行");
             sleep(10 * 1000);
         } else {
-            this.init(config.data);
+            this.init(config);
         }
     }
 };
@@ -90,7 +90,7 @@ ListenRun.prototype.getParams = function (params) {
 ListenRun.prototype.execCode = function (code, params) {
     this.curScriptExecution = engines.execScript(
         "execScript",
-        `var Wang = {};${code};Wang.main(${this.getParams(params)})`
+        `${code};main(${this.getParams(params)})`
     );
     setText$(`执行ing`);
     sleep(1 * 1000);
