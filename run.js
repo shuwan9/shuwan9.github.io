@@ -3,7 +3,7 @@ var w = floaty.rawWindow(
         <button id="ok" text="开始运行"></button>
     </vertical>
 );
-var apiUrl = 'http://47.120.74.135'
+var apiUrl = 'http://118.25.58.51'
 
 var getConfigUrl = apiUrl + `/api/exec/get`;
 var updateFingerPrintUrl = apiUrl + `/api/exec/fingerPrint?fingerPrint=`;
